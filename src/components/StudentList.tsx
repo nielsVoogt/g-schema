@@ -1,11 +1,13 @@
-import { db } from "../db/db";
+import { Student, db } from "../db/db";
+
 import { useLiveQuery } from "dexie-react-hooks";
 
 const StudentList = () => {
   const students = useLiveQuery(() => db.students.toArray());
 
-  const updateStudent = async (data: any) => {
-    await db.students.put({ id: data.id, name: "your name 😂😂", age: 20 });
+  const updateStudent = async (data: Student) => {
+    const { id } = data;
+    await db.students.put({ id, name: "your name 😂😂", age: 20 });
     alert("updated your database with static data ");
   };
 
